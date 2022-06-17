@@ -39,15 +39,15 @@ class ComplexNumberClass {
 }
 
 // Here are some class fields that hold useful predefined complex numbers.
-Complex.ZERO = new Complex(0,0);
-Complex.ONE = new Complex(1,0);
-Complex.I = new Complex(0,1);
+ComplexNumberClass.ZERO = new ComplexNumberClass(0, 0);
+ComplexNumberClass.ONE = new ComplexNumberClass(1, 0);
+ComplexNumberClass.I = new ComplexNumberClass(0, 1);
 
 
 // ds, instance methods, class fields, and class methods with code like this:
-let c = new Complex(2, 3); // Create a new object with the constructor
-let d = new Complex(c.i, c.r); // Use instance fields of c
+let c = new ComplexNumberClass(2, 3); // Create a new object with the constructor
+let d = new ComplexNumberClass(c.i, c.r); // Use instance fields of c
 c.plus(d).toString() // => "{5,5}"; use instance methods
 c.magnitude // => Math.hypot(2,3); use a getter function
-Complex.product(c, d) // => new Complex(0, 13); a static method
-Complex.ZERO.toString() // => "{0,0}"; a static property
+ComplexNumberClass.product(c, d); // => new Complex(0, 13); a static method
+ComplexNumberClass.ZERO.toString(); // => "{0,0}"; a static property
