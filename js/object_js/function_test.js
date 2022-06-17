@@ -195,3 +195,64 @@ function vectorMultiply({ v1, v2 }, scalar) {
         v2: v2 * scalar
     };
 }
+vectorMultiply({ x: 1, y: 2 }, 2) // => {x: 2, y: 4}
+
+function vectorAdd({ x: x1, y: y1 }, { x: x2, y: y2 }) {
+    return {
+        x: x1 + x2,
+        y: y1 + y2
+    };
+}
+vectorAdd({x: 1, y: 2}, {x: 3, y: 4}) // => {x: 4, y: 6}
+// Multiply the vector {x,y} or {x,y,z} by a scalar value
+function vectorMultiply({x, y, z=0}, scalar) {
+ return { x: x*scalar, y: y*scalar, z: z*scalar };
+}
+vectorMultiply({ x: 1, y: 2 }, 2) // => {x: 2, y: 4, z: 0}
+
+function arraycopy({from, to=from, n=from.length, fromIndex=0, toIndex=0}) {
+ let valuesToCopy = from.slice(fromIndex, fromIndex + n);
+ to.splice(toIndex, 0, ...valuesToCopy);
+ return to;
+}
+
+let a = [1, 2, 3, 4, 5];
+let b = [6, 7, 8, 9, 10];
+arraycopy({ from: a, to: b, n: 3, fromIndex: 1, toIndex: 2 });
+// b == [1, 6, 7, 2, 3, 4, 5, 8, 9, 10]
+
+
+// This function expects an array argument. The first two elements of that
+// array are unpacked into the x and y parameters. Any remaining elements
+// are stored in the coords array. And any arguments after the first array
+// are packed into the rest array.
+function f([x, y, ...coords], ...rest) {
+ return [x+y, ...rest, ...coords]; // Note: spread operator here
+}
+f([1, 2, 3, 4], 5, 6) // => [3, 5, 6, 3, 4]
+
+// Multiply the vector {x,y} or {x,y,z} by a scalar value, retain other props
+function vectorMultiply({x, y, z=0, ...props}, scalar) {
+ return { x: x*scalar, y: y*scalar, z: z*scalar, ...props };
+}
+vectorMultiply({ x: 1, y: 2, w: -1 }, 2) // => {x: 2, y: 4, z: 0, w: -1}
+
+
+// Return the sum of the elements an iterable object a.
+// The elements of a must all be numbers.
+function sum(a) {
+ let total = 0;
+ for(let element of a) { // Throws TypeError if a is not iterable
+ if (typeof element !== "number") {
+ throw new TypeError("sum(): elements must be numbers");
+ }
+ total += element;
+ }
+ return total;
+}
+
+function square (x) {
+    return x * x;
+}
+
+let s = sq
