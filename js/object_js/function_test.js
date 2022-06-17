@@ -117,3 +117,81 @@ function max(first = -Infinity, ...reset) {
     }
     return maxValue;
 }
+
+// another way to find out max Number
+
+function max(x) {
+    let max = x[0];
+    for(let i = 1; i < x.length; i++) {
+        if(x[i] > max) max = x[i];
+    }
+    return max;
+}
+
+//max using -Infinity
+function max(x) {
+    let max = -Infinity;
+    for(let i = 0; i < x.length; i++) {
+        if(x[i] > max) max = x[i];
+    }
+    return max;
+}
+
+//using Math.max
+function max(x) {
+    let max = Math.max(...x);
+    return max;
+}
+
+
+// function take a function and return a wrapped version of that function that only invokes the original function once.
+function timed(f) {
+    return function (...args) {
+        // console log show function name 
+        console.log(`${f.name}`);
+        // create date time object 
+        let startTime = Date.now();
+        // call function
+        try {
+            return f(...args);
+        }
+        finally {
+            // calculate time taken to execute function
+            let endTime = Date.now();
+            let timeTaken = endTime - startTime;
+            console.log(`Time taken to execute ${f.name} is ${timeTaken} ms`);
+        }
+            
+    }
+        
+}
+
+// calculate time taken to execute function
+
+function benchmark(n) {
+    let sum = 0;
+    for(let i = 0; i < n; i++) {
+        sum += n(i);
+    }
+    return sum;
+        
+}
+// benchmark function
+calculeteTimeTaken = timed(benchmark)(1000000);
+console.log(calculeteTimeTaken);
+
+//vactor add 
+function add(x, y) {
+    return [x[0] + y[0], x[1] + y[1]];
+}
+function vectorAdd([x1,y1], [x2,y2]) { // Unpack 2 arguments into 4 parameters
+ return [x1 + x2, y1 + y2];
+}
+
+// a function that takes vactor {v1,v2} and multiply them
+function vectorMultiply({ v1, v2 }, scalar) {
+    return {
+        v1: v1 * scalar,
+        v2: v2 * scalar
+    };
+}
