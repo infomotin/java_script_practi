@@ -19,3 +19,5 @@ let r = new Range(1, 3);
 console.log(r.includes(2));
 console.log(r.toString());
 [...r];
+
+console.log(r instanceof Range); // => true
