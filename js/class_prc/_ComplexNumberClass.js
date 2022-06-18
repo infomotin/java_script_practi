@@ -51,3 +51,28 @@ c.plus(d).toString() // => "{5,5}"; use instance methods
 c.magnitude // => Math.hypot(2,3); use a getter function
 ComplexNumberClass.product(c, d); // => new Complex(0, 13); a static method
 ComplexNumberClass.ZERO.toString(); // => "{0,0}"; a static property
+
+
+// The prototype object of built-in JavaScript classes is also open like this, which means
+// that we can add methods to numbers, strings, arrays, functions, and so on. This is
+// useful for implementing new language features in older versions of the language:
+
+ComplexNumberClass.prototype.conj = function () { return new ComplexNumberClass(this.real, -this.imaginary); }
+
+// if function execicet 
+// If the new String method startsWith() is not already defined...
+if (!String.prototype.startsWith) {
+ // ...then define it like this using the older indexOf() method.
+ String.prototype.startsWith = function(s) {
+ return this.indexOf(s) === 0;
+ };
+}
+
+// Invoke the function f this many times, passing the iteration number
+// For example, to print "hello" 3 times:
+// let n = 3;
+// n.times(i => { console.log(`hello ${i}`); });
+Number.prototype.times = function(f, context) {
+ let n = this.valueOf();
+ for(let i = 0; i < n; i++) f.call(context, i);
+};
